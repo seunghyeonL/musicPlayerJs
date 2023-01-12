@@ -1,4 +1,4 @@
-const musics = [
+module.exports = [
     {
         name: 'music1',
         singer: 'Nell',
@@ -32,5 +32,3 @@ const musics = [
         heart: '10',
     }
 ]
-
-export default musics;

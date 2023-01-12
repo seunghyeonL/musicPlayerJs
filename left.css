@@ -126,6 +126,9 @@
     transition: all ease-in-out 0.5s;
 }
 
+.music-index {
+    display: none;
+}
 
 .left-box__play {
     display: flex;
