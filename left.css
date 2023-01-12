@@ -9,10 +9,12 @@
 }
 
 .left-box {
+    padding: 10px;
     width: 350px;
-    height: 800px;
-    border-radius: 40px;
+    height: 810px;
+    border-radius: 10px;
     background-color: white;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.19), 0 6px 6px -10px rgba(0, 0, 0, 0.23);
 }
 
 .left-box__main {
@@ -20,34 +22,48 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    color: white;
+    height: 350px;
 }
 
 .left-box__main img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
 }
 
 .left-box__main h1 {
     margin-bottom: 5px;
+    font-size: 50px;
+    position: relative;
+    text-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);
 }
 
 .left-box__main h5 {
     margin-top: 0px;
-    opacity: 0.5;
+    font-size: 15px;
+    position: relative;
+    text-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);
 }
 
 .left-box__actioins {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    align-items: center;
+    position: relative;
+    padding-top: 25px;
 }
 
 .left-box__shuffle, .left-box__heart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0px 5px;
-    padding: 10px 30px;
+    /* padding: 10px 30px; */
     border-radius: 20px;
+    height: 40px;
+    width: 120px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);
     font-weight: 600;
     background-color: white;
@@ -57,7 +73,7 @@
 
 .left-box__shuffle:hover, .left-box__heart:hover {
     background-color: black;
-    color: white;
+    color: #d30320;
 }
 
 .left-box__heart i {
@@ -66,6 +82,7 @@
 
 .left-box__list {
     display: flex;
+    padding-top: 5px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -74,14 +91,13 @@
 
 .left-box__lists {
     height: 90px;
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
-    border-radius: 20px;
     background-color: white;
     color: black;
     transition: all ease-in-out 0.5s;
+    /* border-bottom: 1px solid gainsboro; */
 }
 
 .left-box__lists:hover {
@@ -92,6 +108,7 @@
 .left-box__lists > div {
     display: flex;
     align-items: center;
+
 }
 
 .left-box__lists img {
@@ -122,7 +139,7 @@
 
 .left-box__lists__text h5, .left-box__play__text h5 {
     margin-bottom: 8px;
-    color: #898989;
+    color: #666;
     transition: all ease-in-out 0.5s;
 }
 
