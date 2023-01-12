@@ -20,7 +20,7 @@
           <h5></h5>
           <div class="left-box__actioins">
             <span class="left-box__shuffle">Shuffle</span>
-            <span class="left-box__heart"><i class="fas fa-heart"></i>231,156</span>
+            <span class="left-box__heart"><i class="fas fa-heart"></i>default</span>
           </div>
         </div>
 
@@ -51,35 +51,55 @@
     </div>
 
     <div class="right">
-      <div class="right-box">
-        <header>
-          <i class="fas fa-arrow-left"></i>
-          <i class="fas fa-ellipsis-v"></i>
-        </header>
-        <div class="right-box__main">
-          <img src="default" />
-          <h1></h1>
-          <h5></h5>
+      <div class="player__container">
+        <div class="player__body">
+          <div class="body__cover">
+            <img src="default" alt="Album cover" />
+          </div>
+    
+          <div class="body__info">
+            <div class="info__album">Newton's Apple</div>
+    
+            <div class="info__song">Four times around</div>
+    
+            <div class="info__artist">Nell</div>
+          </div>
+          
+          <div class="right-box__range">
+            <input type="range" min="0" max="100" />
+          </div>
+          <div class="right-box__time">
+            <span>curtime</span>
+            <span>endtime</span>
+          </div>
+          
+    
+          <div class="body__buttons">
+            <ul class="list list--buttons">
+              <li><a href="#" class="list__link"><i class="fa fa-step-backward"></i></a></li>
+    
+              <li><a href="#" class="list__link"><i class="fa fa-play"></i></a></li>
+              <li class="hide"><a href="#" class="list__link"><i class="fa fa-pause fa-2x"></i></a></li>
+    
+              <li><a href="#" class="list__link"><i class="fa fa-step-forward"></i></a></li>
+            </ul>
+          </div>
         </div>
-
-        <div class="right-box__time">
-          <span>1:56</span>
-          <span>2:38</span>
+    
+        <div class="player__footer">
+          <ul class="list list--footer">
+            <li><a href="#" class="list__link"><i class="fa fa-heart-o"></i></a></li>
+    
+            <li><a href="#" class="list__link"><i class="fa fa-random"></i></a></li>
+    
+            <li><a href="#" class="list__link"><i class="fa fa-undo"></i></a></li>
+    
+            <li><a href="#" class="list__link"><i class="fa fa-ellipsis-h"></i></a></li>
+          </ul>
         </div>
-        <div class="right-box__range">
-          <input type="range" min="0" max="100" />
-        </div>
-        <div class="right-box__icons">
-          <i class="fas fa-sync fa-lg"></i>
-          <i class="fas fa-step-backward fa-lg"></i>
-          <i class="fas fa-play-circle fa-4x"></i>
-          <i class="fas fa-step-forward fa-lg"></i>
-          <i class="fas fa-random fa-lg"></i>
-        </div>
-
       </div>
     </div>
-  </div>
+    </div>
 
   <script src="https://kit.fontawesome.com/37db828213.js" crossorigin="anonymous"></script>
   <script src="index.js"></script>

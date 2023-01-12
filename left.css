@@ -7,7 +7,6 @@
     align-items: center;
     margin-right: 50px;
 }
-
 .left-box {
     padding: 10px;
     width: 350px;
@@ -16,7 +15,6 @@
     background-color: white;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.19), 0 6px 6px -10px rgba(0, 0, 0, 0.23);
 }
-
 .left-box__main {
     display: flex;
     align-items: center;
@@ -25,28 +23,24 @@
     color: white;
     height: 350px;
 }
-
 .left-box__main img {
     position: absolute;
     width: 350px;
     height: 350px;
     border-radius: 10px;
 }
-
 .left-box__main h1 {
     margin-bottom: 5px;
     font-size: 50px;
     position: relative;
     text-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);
 }
-
 .left-box__main h5 {
     margin-top: 0px;
     font-size: 15px;
     position: relative;
     text-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);
 }
-
 .left-box__actioins {
     display: flex;
     justify-content: center;
@@ -54,7 +48,6 @@
     position: relative;
     padding-top: 25px;
 }
-
 .left-box__shuffle, .left-box__heart {
     display: flex;
     justify-content: center;
@@ -70,16 +63,13 @@
     color: black;
     transition: all ease-in-out 0.5s;
 }
-
 .left-box__shuffle:hover, .left-box__heart:hover {
     background-color: black;
-    color: #d30320;
+    color: #D30320;
 }
-
 .left-box__heart i {
     padding-right: 5px;
 }
-
 .left-box__list {
     display: flex;
     padding-top: 5px;
@@ -87,72 +77,59 @@
     align-items: center;
     justify-content: space-between;
 }
-
-
 .left-box__lists {
     height: 90px;
-    width: 90%;
+    width: 330px;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     background-color: white;
-    color: black;
-    transition: all ease-in-out 0.5s;
-    /* border-bottom: 1px solid gainsboro; */
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
-
+.left-box__lists:after {
+    position: absolute;
+    transition: all 0.3s ease;
+}
 .left-box__lists:hover {
-    background-color: black;
-    color: white;
+    color: rgba(0, 0, 0, 0.386);
+    text-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);;
 }
-
 .left-box__lists > div {
     display: flex;
     align-items: center;
-
 }
-
 .left-box__lists img {
     width: 50px;
     height: 50px;
     border-radius: 15px;
 }
-
 .left-box__lists i {
     color: #898989;
     display: flex;
     align-items: center;
     transition: all ease-in-out 0.5s;
 }
-
 .left-box__lists i:hover {
     color: white;
 }
-
 .left-box__lists__text {
     margin-left: 20px;
     margin-top: 0;
 }
-
 .left-box__lists__text h4 {
     margin-top: 0;
 }
-
 .left-box__lists__text h5, .left-box__play__text h5 {
     margin-bottom: 8px;
     color: #666;
     transition: all ease-in-out 0.5s;
 }
-
-.music-index {
-    display: none;
-}
-
 .left-box__play {
     display: flex;
     justify-content: center;
     padding-top: 10px ;
 }
-
 .left-box__plays {
     display: flex;
     justify-content: space-around;
@@ -166,24 +143,17 @@
     transition: all ease-in-out 0.5s;
     border: none;
 }
-
 .left-box__plays:hover {
     color: black;
     background-color: white;
     border: 1px solid #898989;;
 }
-
 .left-box__play__text h4 {
     margin-top: 0;
 }
-
 .left-box__play__i {
     display: flex;
     align-items: center;
-}
-
-.fa-pause {
-    margin: 0 20px;
 }
 
 @keyframes spinCircle {
@@ -194,20 +164,20 @@
         transform:translate(-50%, -50%) rotate(360deg);
     }
 }
-
 .loadingBox{
     position: relative;
 }
-
 .circle {
     position: absolute;
     right: -4px;
 }
-
 .loadingBox .circle {
     transform:translate(-50%, -50%); width:10px; height:10px; border:10px solid #fff; border-top:10px solid black; border-radius:50em; transition:all .2s;
     animation-name:spinCircle;
     animation-duration:.8s;
     animation-iteration-count:infinite;
     animation-timing-function:linear;
+}
+.music-index {
+    visibility: hidden;
 }
