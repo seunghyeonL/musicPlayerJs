@@ -1,0 +1,193 @@
+.left {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.left-box {
+    width: 350px;
+    height: 800px;
+    border-radius: 40px;
+    background-color: white;
+}
+
+.left-box__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.left-box__main img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);
+}
+
+.left-box__main h1 {
+    margin-bottom: 5px;
+}
+
+.left-box__main h5 {
+    margin-top: 0px;
+    opacity: 0.5;
+}
+
+.left-box__actioins {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.left-box__shuffle, .left-box__heart {
+    margin: 0px 5px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.10);
+    font-weight: 600;
+    background-color: white;
+    color: black;
+    transition: all ease-in-out 0.5s;
+}
+
+.left-box__shuffle:hover, .left-box__heart:hover {
+    background-color: black;
+    color: white;
+}
+
+.left-box__heart i {
+    padding-right: 5px;
+}
+
+.left-box__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.left-box__lists {
+    height: 90px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-radius: 20px;
+    background-color: white;
+    color: black;
+    transition: all ease-in-out 0.5s;
+}
+
+.left-box__lists:hover {
+    background-color: black;
+    color: white;
+}
+
+.left-box__lists > div {
+    display: flex;
+    align-items: center;
+}
+
+.left-box__lists img {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+}
+
+.left-box__lists i {
+    color: #898989;
+    display: flex;
+    align-items: center;
+    transition: all ease-in-out 0.5s;
+}
+
+.left-box__lists i:hover {
+    color: white;
+}
+
+.left-box__lists__text {
+    margin-left: 20px;
+    margin-top: 0;
+}
+
+.left-box__lists__text h4 {
+    margin-top: 0;
+}
+
+.left-box__lists__text h5, .left-box__play__text h5 {
+    margin-bottom: 8px;
+    color: #898989;
+    transition: all ease-in-out 0.5s;
+}
+
+
+.left-box__play {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px ;
+}
+
+.left-box__plays {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    background-color: black;
+    border-radius: 50px;
+    opacity: 0.9;
+    width: 90%;
+    height: 70px;
+    transition: all ease-in-out 0.5s;
+    border: none;
+}
+
+.left-box__plays:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid #898989;;
+}
+
+.left-box__play__text h4 {
+    margin-top: 0;
+}
+
+.left-box__play__i {
+    display: flex;
+    align-items: center;
+}
+
+.fa-pause {
+    margin: 0 20px;
+}
+
+@keyframes spinCircle {
+    from {
+        transform:translate(-50%, -50%) rotate(0);
+    }
+    to {
+        transform:translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.loadingBox{
+    position: relative;
+}
+
+.circle {
+    position: absolute;
+    right: -4px;
+}
+
+.loadingBox .circle {
+    transform:translate(-50%, -50%); width:10px; height:10px; border:10px solid #fff; border-top:10px solid black; border-radius:50em; transition:all .2s;
+    animation-name:spinCircle;
+    animation-duration:.8s;
+    animation-iteration-count:infinite;
+    animation-timing-function:linear;
+}
