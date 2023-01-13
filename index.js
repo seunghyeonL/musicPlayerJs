@@ -1,64 +1,10 @@
-// const musics = require('./dummyMusicDatas.js');
-// console.log(musics);
-
-const musics = [
-    {
-        title: 'music1',
-        cover: 'https://image.bugsm.co.kr/album/images/500/1512/151262.jpg',
-        singer: 'Nell',
-        singerCover:'https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/2mfB/image/R8GLZlp58OLS1ozlZS5wvyqA5_Y.jpg',
-        genre: 'genre1',
-        album: 'album1',
-        musicFile: './music/music1.mp3',
-        heart: 10,
-    },
-    {
-        title: 'music2',
-        cover: 'https://image.bugsm.co.kr/album/images/500/1512/151262.jpg',
-        singer: 'Nell',
-        singerCover:'https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/2mfB/image/R8GLZlp58OLS1ozlZS5wvyqA5_Y.jpg',
-        genre: 'genre2',
-        album: 'album1',
-        musicFile: './music/music1.mp3',
-        heart: 10,
-    },
-    {
-        title: 'music3',
-        cover: 'https://image.aladin.co.kr/product/3718/88/cover500/4775054147_1.jpg',
-        singer: 'Nell',
-        singerCover:'https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/2mfB/image/R8GLZlp58OLS1ozlZS5wvyqA5_Y.jpg',
-        genre: 'genre3',
-        album: 'album1',
-        musicFile: './music/music1.mp3',
-        heart: 10,
-    },
-    {
-        title: 'music4',
-        cover: 'https://i.ytimg.com/vi/WNjZbszU7eY/hqdefault.jpg',
-        singer: 'Nell',
-        singerCover:'https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/2mfB/image/R8GLZlp58OLS1ozlZS5wvyqA5_Y.jpg',
-        genre: 'genre4',
-        album: 'album1',
-        musicFile: './music/music1.mp3',
-        heart: 10,
-    },
-    {
-        title: 'music5',
-        cover: 'https://i.ytimg.com/vi/WNjZbszU7eY/hqdefault.jpg',
-        singer: 'Nell',
-        singerCover:'https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/2mfB/image/R8GLZlp58OLS1ozlZS5wvyqA5_Y.jpg',
-        genre: 'genre5',
-        album: 'album1',
-        musicFile: './music/music1.mp3',
-        heart: 10,
-    }
-]
+import { musics } from "./dummyMusicDatas.js"
+console.log(musics);
 
 // <상태정보>
 const musicState = {
     curIdx : 0,
-    audio : null,
-    onPlay : false
+    audio : null
 }
 
 const playState = {
@@ -90,17 +36,31 @@ function makeSpinDiv() {
 
 const btnLeftShuffle = document.querySelector('.left-box__shuffle');
 const btnHeart = document.querySelector('.left-box__heart');
+
 const player = document.querySelector('.list--buttons');
+const btnPrevMusic = player.children[0];
 const btnPlay = player.children[1];
 const btnPause = player.children[2];
+const btnNextMusic = player.children[3];
 
+const playScrollBar = document.querySelector('input[type=range]');
+const musicTime = document.querySelector('.right-box__time');
+
+const footer = document.querySelector('.list--footer');
+const btnRightHeart = footer.children[0];
+const btnRightShuffle = footer.children[1];
+const btnRightRepeat = footer.children[2];
 // <이벤트 등록>
 
 document.addEventListener('DOMContentLoaded', function() {
+    audioControllerInit();
     leftMainChange();
     rightMainChange();
     musicListMake();
-    audioMake();
+    audioCreate();
+    setTimeout(() => {
+        playHandler();
+    }, 0)
 })
 
 function musicListMake() {
@@ -127,17 +87,83 @@ btnHeart.addEventListener('click', heartClickHandler);
 btnPlay.addEventListener('click', playHandler);
 btnPause.addEventListener('click', pauseHandler);
 
-function audioMake() {
+btnPrevMusic.addEventListener('click', () => {
+    musicState.curIdx = (musicState.curIdx === 0 ? musics.length-1 : musicState.curIdx-1);
+    musicChange();
+})
+btnNextMusic.addEventListener('click', () => {
+    musicState.curIdx = (musicState.curIdx === musics.length-1 ? 0 : musicState.curIdx+1);
+    musicChange();
+})
+
+btnRightHeart.addEventListener('click', heartClickHandler);
+btnRightShuffle.addEventListener('click', () => {
+    if(playState.default) {
+        btnRightShuffle.children[0].classList.add('picked');
+        playState.default = false;
+        playState.shuffle = true;
+        playState.repeat = false;
+    }
+    else {
+        btnRightShuffle.children[0].classList.remove('picked');
+        playState.default = true;
+        playState.shuffle = false;
+        playState.repeat = false;
+    }
+})
+btnRightRepeat.addEventListener('click', () => {
+    if(playState.default) {
+        btnRightRepeat.classList.add('picked');
+        playState.default = false;
+        playState.shuffle = false;
+        playState.repeat = true;
+    }
+    else {
+        btnRightRepeat.classList.remove('picked');
+        playState.default = true;
+        playState.shuffle = false;
+        playState.repeat = false;
+    }
+})
+
+playScrollBar.addEventListener('input', playScrollBarHandler);
+
+function audioCreate() {
     const audioElement = new Audio(musics[musicState.curIdx].musicFile);
     // rightMainBox.append(audioElement);
     musicState.audio = audioElement;
-    musicState.audio.addEventListener('progress', audioProgressHandler);
+
+    musicState.audio.addEventListener('canplaythrough', audioLoadedHandler );
+    musicState.audio.addEventListener('timeupdate', audioTimeUpdateHandler);
+    musicState.audio.addEventListener('ended', audioEndHandler);
+}
+
+function audioRemove() {
+    musicState.audio.pause();
+    audioControllerInit();
+    musicState.audio.removeEventListener('canplaythrough', audioLoadedHandler);
+    musicState.audio.removeEventListener('timeupdate', audioTimeUpdateHandler);
+    musicState.audio.removeEventListener('ended', audioEndHandler);
+    musicState.audio = null;
 }
 
 
 // 이벤트 함수
 
-function shuffleClickHandler(event) {
+function audioEndHandler() {
+    if(playState.default) {
+        musicState.curIdx = (musicState.curIdx === musics.length-1 ? 0 : musicState.curIdx+1);
+        musicChange();
+    }
+    else if(playState.repeat) {
+        musicChange();
+    }
+    else if(playState.shuffle) {
+        shuffleClickHandler();
+    }
+}
+ 
+function shuffleClickHandler() {
     while(1) {
         const nextMusicIdx = Math.floor((Math.random() * musics.length));
         if(musicState.curIdx !== nextMusicIdx) {
@@ -145,9 +171,7 @@ function shuffleClickHandler(event) {
             break;
         }
     }
-    leftMainChange();
-    rightMainChange();
-    musicListChange();
+    musicChange();
 }
 
 
@@ -162,32 +186,53 @@ function heartClickHandler(event) {
 function musicListClickHandler(event) {
     musicState.curIdx = Number(event.target.children[1].textContent);
 
-    leftMainChange();
-    rightMainChange();
-    musicListChange();
+    musicChange();
 }
 
 function playHandler() {
     musicState.audio.play();
-    musicState.onPlay = true;
     btnPlay.classList.add('hide');
     btnPause.classList.remove('hide');
-    console.log(musicState.audio.duration);
 }
 
 function pauseHandler() {
     musicState.audio.pause();
-    musicState.onPlay = false;
     btnPlay.classList.remove('hide');
     btnPause.classList.add('hide');
-    console.log(musicState.audio.duration);
 }
 
-function audioProgressHandler() {
-
+function audioLoadedHandler() {
+    // const playScrollBar = document.querySelector('input[type=range]');
+    // const musicTime = document.querySelector('.right-box__time');
+    playScrollBar.max = musicState.audio.duration;
+    
+    musicTime.children[1].textContent = makeMinuteSecond(musicState.audio.duration);
 }
+
+function audioTimeUpdateHandler() {
+    console.log(musicState.audio.currentTime);
+    playScrollBar.value = musicState.audio.currentTime;
+    musicTime.children[0].textContent = makeMinuteSecond(musicState.audio.currentTime);
+}
+
+function playScrollBarHandler() {
+    musicState.audio.currentTime = playScrollBar.value;
+}
+
 // 기능 함수
 // <left 조작>
+function musicChange() {
+    audioRemove();
+    leftMainChange();
+    rightMainChange();
+    musicListChange();
+    audioCreate();
+    setTimeout(() => {
+        playHandler();
+    }, 0)
+    
+}
+
 function musicListChange() {
     spinDiv.remove();
     const leftLists = leftListWrapBox.children;
@@ -224,6 +269,19 @@ function heartChange() {
 }
 
 // <right 조작>
+function makeMinuteSecond(time) {
+    const minute = Math.floor(time/60);
+    const second = Math.floor(time%60);
+    const digit2Minute = minute < 10 ? `0${minute}` : `${minute}`;
+    const digit2Second = second < 10 ? `0${second}` : `${second}`;
+    return digit2Minute + ':' + digit2Second;
+}
 
-
-
+function audioControllerInit() {
+    // const playScrollBar = document.querySelector('input[type=range]');
+// const musicTime = document.querySelector('.right-box__time');
+    playScrollBar.value = 0;
+    btnPlay.classList.remove('hide');
+    btnPause.classList.add('hide');
+    musicTime.children[0].textContent = '00:00';
+}

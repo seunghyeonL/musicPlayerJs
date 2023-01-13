@@ -219,7 +219,7 @@ input[type=range]:focus {
     transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
 }
 
-.list__link:focus,
+/* .list__link:focus, */
 .list__link:hover {
     color: #d30320;
 }
@@ -240,4 +240,8 @@ input[type=range]:focus {
 
 .hide {
     display: none;
+}
+
+.picked {
+    color: #d30320;
 }
