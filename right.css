@@ -233,15 +233,15 @@ input[type=range]:focus {
     opacity: 0.5;
 }
 
-.list--footer a:focus,
+/* .list--footer a:focus, */
 .list--footer a:hover {
     opacity: 0.9;
+}
+.list--footer .picked {
+    color: #d30320;
 }
 
 .hide {
     display: none;
 }
 
-.picked {
-    color: #d30320;
-}

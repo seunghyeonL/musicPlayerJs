@@ -98,32 +98,32 @@ btnNextMusic.addEventListener('click', () => {
 
 btnRightHeart.addEventListener('click', heartClickHandler);
 btnRightShuffle.addEventListener('click', () => {
-    if(playState.default) {
-        btnRightShuffle.children[0].classList.add('picked');
+    if(!playState.shuffle) {
+        btnRightShuffle.children[0].children[0].classList.add('picked');
         playState.default = false;
         playState.shuffle = true;
-        playState.repeat = false;
     }
     else {
-        btnRightShuffle.children[0].classList.remove('picked');
-        playState.default = true;
+        btnRightShuffle.children[0].children[0].classList.remove('picked');
         playState.shuffle = false;
-        playState.repeat = false;
     }
+    
+    if(!playState.shuffle && !playState.repeat) playState.default = true;
+    console.log(playState);
 })
 btnRightRepeat.addEventListener('click', () => {
-    if(playState.default) {
-        btnRightRepeat.classList.add('picked');
+    if(!playState.repeat) {
+        btnRightRepeat.children[0].children[0].classList.add('picked');
         playState.default = false;
-        playState.shuffle = false;
         playState.repeat = true;
     }
     else {
-        btnRightRepeat.classList.remove('picked');
-        playState.default = true;
-        playState.shuffle = false;
+        btnRightRepeat.children[0].children[0].classList.remove('picked');
         playState.repeat = false;
     }
+    
+    if(!playState.shuffle && !playState.repeat) playState.default = true;
+    console.log(playState);
 })
 
 playScrollBar.addEventListener('input', playScrollBarHandler);
