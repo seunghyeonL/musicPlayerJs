@@ -214,12 +214,20 @@ function audioLoadedHandler() {
 
 function audioTimeUpdateHandler() {
     console.log(musicState.audio.currentTime);
-    playScrollBar.value = musicState.audio.currentTime;
+    const currentTime = musicState.audio.currentTime;
+    const maxTime = playScrollBar.max;
+    playScrollBar.value = currentTime;
     musicTime.children[0].textContent = makeMinuteSecond(musicState.audio.currentTime);
+
+    playScrollBar.style.backgroundSize = (currentTime) * 100 / (maxTime) + '% 100%';
 }
 
 function playScrollBarHandler() {
-    musicState.audio.currentTime = playScrollBar.value;
+    const currentTime = playScrollBar.value
+    const maxTime = playScrollBar.max;
+    musicState.audio.currentTime = currentTime;
+    
+    playScrollBar.style.backgroundSize = (currentTime) * 100 / (maxTime) + '% 100%';
 }
 
 // 기능 함수
