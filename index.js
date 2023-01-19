@@ -4,7 +4,8 @@ console.log(musics);
 // <상태정보>
 const musicState = {
     curIdx : 0,
-    audio : null
+    audio : null,
+    onPlay : false
 }
 
 const playState = {
@@ -40,8 +41,8 @@ const btnHeart = document.querySelector('.left-box__heart');
 const player = document.querySelector('.list--buttons');
 const btnPrevMusic = player.children[0];
 const btnPlay = player.children[1];
-const btnPause = player.children[2];
-const btnNextMusic = player.children[3];
+const btnPlayIcon = document.querySelector('.play--button');
+const btnNextMusic = player.children[2];
 
 const playScrollBar = document.querySelector('input[type=range]');
 const musicTime = document.querySelector('.right-box__time');
@@ -85,7 +86,6 @@ btnLeftShuffle.addEventListener('click', shuffleClickHandler);
 btnHeart.addEventListener('click', heartClickHandler);
 
 btnPlay.addEventListener('click', playHandler);
-btnPause.addEventListener('click', pauseHandler);
 
 btnPrevMusic.addEventListener('click', () => {
     musicState.curIdx = (musicState.curIdx === 0 ? musics.length-1 : musicState.curIdx-1);
@@ -190,15 +190,18 @@ function musicListClickHandler(event) {
 }
 
 function playHandler() {
-    musicState.audio.play();
-    btnPlay.classList.add('hide');
-    btnPause.classList.remove('hide');
-}
-
-function pauseHandler() {
-    musicState.audio.pause();
-    btnPlay.classList.remove('hide');
-    btnPause.classList.add('hide');
+    if(!musicState.onPlay) {
+        musicState.onPlay = true;
+        musicState.audio.play();
+        btnPlayIcon.classList.remove('fa-play');
+        btnPlayIcon.classList.add('fa-pause');
+    }
+    else {
+        musicState.onPlay = false;
+        musicState.audio.pause();
+        btnPlayIcon.classList.remove('fa-pause');
+        btnPlayIcon.classList.add('fa-play');
+    }
 }
 
 function audioLoadedHandler() {
@@ -280,8 +283,9 @@ function makeMinuteSecond(time) {
 function audioControllerInit() {
     // const playScrollBar = document.querySelector('input[type=range]');
 // const musicTime = document.querySelector('.right-box__time');
+    musicState.onPlay = false;
     playScrollBar.value = 0;
-    btnPlay.classList.remove('hide');
-    btnPause.classList.add('hide');
+    btnPlayIcon.classList.remove('fa-pause');
+    btnPlayIcon.classList.add('fa-play');
     musicTime.children[0].textContent = '00:00';
 }
